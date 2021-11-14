@@ -1,21 +1,24 @@
+import { PoolInterest } from './PoolInterest'
 import { PoolRecurrenceEnum } from './PoolRecurrenceEnum'
 import { PoolStatusEnum } from './PoolStatusEnum'
 
 export interface Pool {
   id: number
-  img: string
+  img?: string
   title: string
   startDate: string
-  endDate: string
-  startHour: string
-  endHour: string
-  description: string
-  duringAllDay: boolean
+  endDate?: string
+  startHour?: string
+  endHour?: string
+  description?: string
+  duringAllDay?: boolean
   private: boolean
-  location: string
+  location?: string
   createdBy: number
-  recurrence: PoolRecurrenceEnum
+  recurrence?: PoolRecurrenceEnum
   status: PoolStatusEnum
-  createdAt: string
-  updatedAt: string
+  free: boolean
+  interests?: PoolInterest[]
+  createdAt?: string
+  updatedAt?: string
 }
