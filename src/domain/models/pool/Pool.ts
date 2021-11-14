@@ -1,9 +1,10 @@
 import { PoolInterest } from './PoolInterest'
-import { PoolRecurrenceEnum } from './PoolRecurrenceEnum'
-import { PoolStatusEnum } from './PoolStatusEnum'
+import { PoolRecurrenceEnum } from './enums/PoolRecurrenceEnum'
+import { PoolStatusEnum } from './enums/PoolStatusEnum'
 
 export interface Pool {
   id: number
+
   img?: string
   title: string
   startDate: string
@@ -16,9 +17,11 @@ export interface Pool {
   location?: string
   createdBy: number
   recurrence?: PoolRecurrenceEnum
-  status: PoolStatusEnum
   free: boolean
   interests?: PoolInterest[]
+
+  status: PoolStatusEnum
+
   createdAt?: string
   updatedAt?: string
 }
