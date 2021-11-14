@@ -1,3 +1,5 @@
+import { PersonStatusInPoolGroup } from './enums/PersonStatusInPoolGroup'
+
 export interface PoolGroupPerson {
   id: number
 
@@ -5,6 +7,7 @@ export interface PoolGroupPerson {
   idPerson: number
   personName: string
   personImg: string
+  personStatusInGroup?: PersonStatusInPoolGroup
 
   status: boolean
 
