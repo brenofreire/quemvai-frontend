@@ -1,12 +1,11 @@
 import React, { useRef } from 'react'
 
-interface InputProps {
+type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   state: any
   setState: any
-  props: any
 }
 
-const Input: React.FC<InputProps> = ({ state, setState, props }: InputProps) => {
+const Input: React.FC<InputProps> = ({ state, setState, ...props }: InputProps) => {
   const inputRef = useRef<HTMLInputElement | any>()
 
   return (
@@ -14,7 +13,7 @@ const Input: React.FC<InputProps> = ({ state, setState, props }: InputProps) => 
       <input
         {...props}
         readOnly
-        type="text"
+        type={props.type}
         ref={inputRef}
         onFocus={(e) => {
           e.target.readOnly = false
