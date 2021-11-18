@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { theme } from '../../style/style-vars'
 
 type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   state: any
@@ -10,6 +11,8 @@ const Input: React.FC<InputProps> = ({ state, setState, ...props }: InputProps) 
 
   return (
     <div>
+      <label onClick={() => inputRef.current.focus()}>{props.placeholder}</label>
+      <br />
       <input
         {...props}
         readOnly
@@ -19,10 +22,20 @@ const Input: React.FC<InputProps> = ({ state, setState, ...props }: InputProps) 
           e.target.readOnly = false
         }}
         onChange={(e) => setState({ ...state, [e.target.name]: e.target.value })}
+        style={inputStyle}
       />
-      <label onClick={() => inputRef.current.focus()}>{props.placeholder}</label>
     </div>
   )
+}
+
+const inputStyle: React.CSSProperties = {
+  backgroundColor: theme.white,
+  color: theme.black,
+  borderRadius: 4,
+  border: '2px solid',
+  borderColor: theme.primaryColor,
+  outline: 0,
+  padding: 8,
 }
 
 export default Input
