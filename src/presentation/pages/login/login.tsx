@@ -45,8 +45,8 @@ const Login: React.FC<LoginPresenterProps> = ({ authentication }) => {
       <Header></Header>
 
       <form onSubmit={handleSubmit}>
-        <Input name="username" placeholder="Nome de usuário" type="text" />
-        <Input name="password" placeholder="Senha" type="password" />
+        <Input data-testid="username-input" name="usernasme" placeholder="Nome de usuário" type="text" />
+        <Input data-testid="password-input" name="password" placeholder="Senha" type="password" />
 
         <SubmitButton text="Enviar"></SubmitButton>
       </form>

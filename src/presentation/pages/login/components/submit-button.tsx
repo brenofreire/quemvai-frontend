@@ -3,11 +3,11 @@ import { useRecoilValue } from 'recoil'
 import Button from '../../../components/button/Button'
 import { loginState } from '../atom'
 
-type SubmitButton = {
+type SubmitButtonProps = {
   text: string
 }
 
-const SubmitButton: React.FC<SubmitButton> = (props) => {
+const SubmitButton: React.FC<SubmitButtonProps> = (props) => {
   const state = useRecoilValue(loginState)
 
   return <Button state={state} {...props} />
