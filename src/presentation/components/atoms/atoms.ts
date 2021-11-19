@@ -1,10 +1,9 @@
 import { atom } from 'recoil'
 import { Account } from '../../../domain/models/Account'
 
-export const currentAccountState = atom<{}>({
+export const currentAccountState = atom<Account | undefined>({
   key: 'currentAccountState',
-  default: {
-    getCurrentAccount: null as unknown as () => Account,
-    setCurrentAccount: null as unknown as (account: Account) => void,
-  },
+  default: undefined,
 })
+
+export default currentAccountState

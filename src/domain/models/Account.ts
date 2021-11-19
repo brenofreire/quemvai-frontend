@@ -2,7 +2,7 @@ import { AccountStatusEnum } from './AccountStatusEnum'
 
 export interface Account {
   id: number
-  name: string
+  username: string
   email: string
   password: string
   status: AccountStatusEnum

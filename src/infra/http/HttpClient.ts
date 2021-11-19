@@ -1,6 +1,6 @@
 type HttpMethods = 'post' | 'get' | 'put' | 'delete'
 
-enum HttpResponseStatus {
+export enum HttpResponseStatus {
   ok = 200,
   noContent = 204,
   badRequest = 400,
