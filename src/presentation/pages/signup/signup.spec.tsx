@@ -70,6 +70,9 @@ describe('Test SignUp page', () => {
     fireEvent.submit(form)
 
     const loadingSpinner = screen.getByTestId('form-is-loading')
+    const submitbutton = screen.getByTestId('submit-button')
+
     expect(loadingSpinner).toBeInTheDocument()
+    expect(submitbutton).toBeDisabled()
   })
 })

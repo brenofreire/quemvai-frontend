@@ -3,7 +3,7 @@ import { atom } from 'recoil'
 const signupState = atom({
   key: 'signupState',
   default: {
-    isFormLoading: false,
+    isLoading: false,
     name: '',
     username: '',
     email: '',

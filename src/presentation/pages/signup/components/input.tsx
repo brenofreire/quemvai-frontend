@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil'
-import InputBase from '../../../components/input/Input'
+import { Input as InputBase } from '../../../components/index'
 import signupState from '../atom'
 
 type SignUpInputProps = {

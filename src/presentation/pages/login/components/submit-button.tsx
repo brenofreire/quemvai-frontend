@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import Button from '../../../components/button/Button'
+import Button from '../../../components/button/button'
 import { loginState } from '../atom'
 
 type SubmitButtonProps = {

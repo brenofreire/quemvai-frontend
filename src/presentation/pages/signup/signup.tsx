@@ -18,7 +18,7 @@ const SignUp: React.FC<SignUpProps> = ({ signup }) => {
 
     signup.add({} as any)
 
-    setState({ ...state, isFormLoading: true })
+    setState({ ...state, isLoading: true })
   }
 
   return (

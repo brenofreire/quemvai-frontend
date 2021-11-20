@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil'
-import Button from '../../../components/button/Button'
+import { Button } from '../../../components/index'
 import signupState from '../atom'
 
 type SignUpSubmitButton = {
@@ -9,7 +9,7 @@ type SignUpSubmitButton = {
 const SubmitButton: React.FC<SignUpSubmitButton> = ({ text }) => {
   const state = useRecoilValue(signupState)
 
-  return <Button state={state} text={text} />
+  return <Button data-testid="submit-button" state={state} text={text} />
 }
 
 export default SubmitButton

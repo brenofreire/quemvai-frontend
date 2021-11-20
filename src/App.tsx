@@ -1,14 +1,12 @@
 import React from 'react'
 import { RecoilRoot } from 'recoil'
-import './App.css'
-import makeLoginAccountAuthenticator from './main/factories/usecases/login-account-maker'
-import Login from './presentation/pages/login/login'
+import AppRouter from './main/routers/router'
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <RecoilRoot initializeState={() => {}}>
-        <Login authentication={makeLoginAccountAuthenticator()}></Login>
+        <AppRouter></AppRouter>
       </RecoilRoot>
     </div>
   )

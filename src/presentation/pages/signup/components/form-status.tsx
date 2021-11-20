@@ -6,7 +6,7 @@ const FormStatus: React.FC = () => {
 
   return (
     <>
-      {state.isFormLoading && <div data-testid="form-is-loading">Carregando...</div>}
+      {state.isLoading && <div data-testid="form-is-loading">Carregando...</div>}
       {state.usernameError && <div data-testid="form-username-error">{state.usernameError}</div>}
       {state.emailError && <div data-testid="form-email-error">{state.emailError}</div>}
       {state.passwordError && <div data-testid="form-password-error">{state.passwordError}</div>}

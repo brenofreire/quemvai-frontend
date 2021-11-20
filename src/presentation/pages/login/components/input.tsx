@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import InputBase from '../../../components/input/Input'
+import { Input as InputBase } from '../../../components/index'
 import { loginState } from '../atom'
 
 type InputBaseProps = {
