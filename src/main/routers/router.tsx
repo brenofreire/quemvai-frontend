@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { currentAccountState } from '../../presentation/components'
 import SignUp from '../../presentation/pages/signup/signup'
+import SignupValidations from '../builders/singup-validations'
 
 const AppRouter: React.FC = () => {
   const currentAccount = useRecoilValue(currentAccountState)
@@ -19,7 +20,7 @@ const AppRouter: React.FC = () => {
 
     return (
       <Route path="/">
-        <SignUp signup={{ add: () => {} } as any}></SignUp>
+        <SignUp signup={{ add: () => {} } as any} validations={new SignupValidations()}></SignUp>
       </Route>
     )
   }

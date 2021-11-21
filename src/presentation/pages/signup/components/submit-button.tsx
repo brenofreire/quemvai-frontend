@@ -9,7 +9,7 @@ type SignUpSubmitButton = {
 const SubmitButton: React.FC<SignUpSubmitButton> = ({ text }) => {
   const state = useRecoilValue(signupState)
 
-  return <Button data-testid="submit-button" state={state} text={text} />
+  return <Button data-testid="submitButton" state={state} text={text} />
 }
 
 export default SubmitButton

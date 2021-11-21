@@ -6,11 +6,11 @@ const FormStatus: React.FC = () => {
 
   return (
     <>
-      {state.isLoading && <div data-testid="form-is-loading">Carregando...</div>}
-      {state.usernameError && <div data-testid="form-username-error">{state.usernameError}</div>}
-      {state.emailError && <div data-testid="form-email-error">{state.emailError}</div>}
-      {state.passwordError && <div data-testid="form-password-error">{state.passwordError}</div>}
-      {state.confirmPasswordError && <div data-testid="form-confirm-password-error">{state.confirmPasswordError}</div>}
+      {state.isLoading && <div data-testid="formIsLoading">Carregando...</div>}
+      {state.usernameError && <div data-testid="usernameError">{state.usernameError}</div>}
+      {state.emailError && <div data-testid="emailError">{state.emailError}</div>}
+      {state.passwordError && <div data-testid="passwordError">{state.passwordError}</div>}
+      {state.confirmPasswordError && <div data-testid="confirmPasswordError">{state.confirmPasswordError}</div>}
     </>
   )
 }
