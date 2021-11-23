@@ -40,13 +40,14 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
     ev.preventDefault()
 
     const validations = validateForm()
+    const updatedState = { ...state, ...validations }
 
-    setState({ ...state, ...validations })
+    setState(updatedState)
 
     if (!validations.isFormInvalid) {
       signup.add({} as any)
 
-      setState({ ...state, ...validations, isLoading: false })
+      setState({ ...updatedState, isLoading: false })
 
       history.replace('/home')
     }

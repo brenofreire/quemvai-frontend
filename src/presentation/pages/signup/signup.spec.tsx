@@ -29,24 +29,27 @@ const makeSut = () => {
 
 const simulateValidFormInput = (password = faker.internet.password()) =>
   simulateFormInput({
-    name: faker.name.firstName(),
-    username: faker.internet.userName(),
-    email: faker.internet.email(),
     password: password,
     confirmPassword: password,
   })
 
-const simulateFormInput = (params: any): any => {
+const simulateFormInput = ({
+  name = faker.name.firstName(),
+  username = faker.internet.userName(),
+  email = faker.internet.email(),
+  password = faker.internet.password(),
+  confirmPassword = faker.internet.password(),
+}): any => {
   const populateField = (testId: string, value = faker.random.word()) => {
     const el = screen.getByTestId(testId)
     fireEvent.input(el, { target: { value } })
   }
 
-  populateField('nameInput', params.name)
-  populateField('usernameInput', params.username)
-  populateField('emailInput', params.email)
-  populateField('passwordInput', params.password)
-  populateField('confirmPasswordInput', params.confirmPassword)
+  populateField('nameInput', name)
+  populateField('usernameInput', username)
+  populateField('emailInput', email)
+  populateField('passwordInput', password)
+  populateField('confirmPasswordInput', confirmPassword)
 }
 
 const submitForm = async () => {
@@ -94,14 +97,7 @@ describe('Test SignUp page', () => {
 
   it('Should show error when username is not valid', async () => {
     makeSut()
-
-    simulateFormInput({
-      name: faker.name,
-      username: 'sm',
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-      confirmPassword: faker.internet.password(),
-    })
+    simulateFormInput({ username: 'sm' })
 
     await submitForm()
 
@@ -113,13 +109,7 @@ describe('Test SignUp page', () => {
   it('Should show error when email is not valid', async () => {
     makeSut()
 
-    simulateFormInput({
-      name: faker.name,
-      username: faker.internet.userName(),
-      email: 'wrong email',
-      password: faker.internet.password(),
-      confirmPassword: faker.internet.password(),
-    })
+    simulateFormInput({ email: 'wrong email' })
 
     await submitForm()
 
@@ -131,13 +121,7 @@ describe('Test SignUp page', () => {
   it('Should show error when password do not match', async () => {
     makeSut()
 
-    simulateFormInput({
-      name: faker.name,
-      username: faker.internet.userName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-      confirmPassword: 123123123,
-    })
+    simulateFormInput({ confirmPassword: '123123123' })
 
     await submitForm()
 
