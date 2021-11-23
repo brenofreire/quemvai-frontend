@@ -34,6 +34,11 @@ const simulateValidFormInput = (password = faker.internet.password()) =>
     confirmPassword: password,
   })
 
+const populateField = (testId: string, value = faker.random.word()) => {
+  const el = screen.getByTestId(testId)
+  fireEvent.input(el, { target: { value } })
+}
+
 const simulateFormInput = ({
   name = faker.name.firstName(),
   username = faker.internet.userName(),
@@ -41,11 +46,6 @@ const simulateFormInput = ({
   password = faker.internet.password(),
   confirmPassword = faker.internet.password(),
 }): any => {
-  const populateField = (testId: string, value = faker.random.word()) => {
-    const el = screen.getByTestId(testId)
-    fireEvent.input(el, { target: { value } })
-  }
-
   populateField('nameInput', name)
   populateField('usernameInput', username)
   populateField('emailInput', email)
@@ -156,5 +156,20 @@ describe('Test SignUp page', () => {
     const apiError = screen.getByTestId('apiError')
     expect(apiError.innerHTML).toEqual(emailInUseError.message)
     expect(signup.add).toHaveBeenCalled()
+  })
+
+  it('Should disable submit button if some input is not filled', () => {
+    makeSut()
+    const submitbutton = screen.getByTestId('submitButton')
+    populateField('nameInput', 'name')
+    expect(submitbutton).toBeDisabled()
+    populateField('usernameInput', 'username')
+    expect(submitbutton).toBeDisabled()
+    populateField('emailInput', 'email')
+    expect(submitbutton).toBeDisabled()
+    populateField('passwordInput', 'password')
+    expect(submitbutton).toBeDisabled()
+    populateField('confirmPasswordInput', 'confirmPassword')
+    expect(submitbutton).not.toBeDisabled()
   })
 })
