@@ -45,11 +45,15 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
     setState(updatedState)
 
     if (!validations.isFormInvalid) {
-      signup.add({} as any)
-
-      setState({ ...updatedState, isLoading: false })
-
-      history.replace('/home')
+      signup
+        .add({} as any)
+        .then(() => {
+          setState({ ...updatedState, isLoading: false })
+          history.replace('/home')
+        })
+        .catch((error: Error) => {
+          setState({ ...updatedState, isLoading: false, apiError: error.message })
+        })
     }
   }
 

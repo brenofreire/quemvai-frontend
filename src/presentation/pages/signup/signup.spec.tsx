@@ -3,6 +3,7 @@ import faker from 'faker'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router'
 import { RecoilRoot } from 'recoil'
+import EmailInUseError from '../../../domain/erros/EmailInUseError'
 import SignupValidations from '../../../main/builders/singup-validations'
 import { MakeSignupMock } from './mocks'
 import SignUp from './signup'
@@ -82,6 +83,7 @@ describe('Test SignUp page', () => {
     const comp = makeSut()
     simulateValidFormInput()
     await submitForm()
+
     expect(comp.signup.callsCount).toBe(1)
   })
 
@@ -98,35 +100,27 @@ describe('Test SignUp page', () => {
   it('Should show error when username is not valid', async () => {
     makeSut()
     simulateFormInput({ username: 'sm' })
-
     await submitForm()
 
     const usernameError = screen.getByTestId('usernameError')
-
     expect(usernameError).toBeInTheDocument()
   })
 
   it('Should show error when email is not valid', async () => {
     makeSut()
-
     simulateFormInput({ email: 'wrong email' })
-
     await submitForm()
 
     const emailError = screen.getByTestId('emailError')
-
     expect(emailError).toBeInTheDocument()
   })
 
   it('Should show error when password do not match', async () => {
     makeSut()
-
     simulateFormInput({ confirmPassword: '123123123' })
-
     await submitForm()
 
     const confirmPasswordError = screen.getByTestId('confirmPasswordError')
-
     expect(confirmPasswordError).toBeInTheDocument()
   })
 
@@ -134,7 +128,6 @@ describe('Test SignUp page', () => {
     makeSut()
 
     const loginLink = screen.getByTestId('loginLink')
-
     fireEvent.click(loginLink)
 
     expect(history.length).toBe(1)
@@ -145,10 +138,23 @@ describe('Test SignUp page', () => {
   it('Should redirect to /home when have signup sucess', async () => {
     makeSut()
     simulateValidFormInput()
-    const submitbutton = screen.getByTestId('submitButton')
-    fireEvent.submit(submitbutton)
+    await submitForm()
+
     expect(history.length).toBe(1)
     expect(history.location.pathname).toBe('/home')
     // create local storage test
+  })
+
+  it('Should show api error if there is some', async () => {
+    const { signup } = makeSut()
+    const emailInUseError = new EmailInUseError()
+    jest.spyOn(signup, 'add').mockRejectedValueOnce(emailInUseError)
+
+    simulateValidFormInput()
+    await submitForm()
+
+    const apiError = screen.getByTestId('apiError')
+    expect(apiError.innerHTML).toEqual(emailInUseError.message)
+    expect(signup.add).toHaveBeenCalled()
   })
 })

@@ -11,6 +11,7 @@ const FormStatus: React.FC = () => {
       {state.emailError && <div data-testid="emailError">{state.emailError}</div>}
       {state.passwordError && <div data-testid="passwordError">{state.passwordError}</div>}
       {state.confirmPasswordError && <div data-testid="confirmPasswordError">{state.confirmPasswordError}</div>}
+      {state.apiError && <div data-testid="apiError">{state.apiError}</div>}
     </>
   )
 }

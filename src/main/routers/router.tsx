@@ -14,7 +14,6 @@ const AppRouter: React.FC = () => {
       return (
         <Route path="">
           <div>Usuario Logado</div>
-          <div>Usuario Logado</div>
         </Route>
       )
     }

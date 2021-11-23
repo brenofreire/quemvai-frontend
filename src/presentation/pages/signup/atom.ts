@@ -14,6 +14,7 @@ const signupState = atom({
     emailError: '' as string | null,
     passwordError: '' as string | null,
     confirmPasswordError: '' as string | null,
+    apiError: '' as string | null,
   },
 })
 
