@@ -10,7 +10,7 @@ export default class SignupValidations implements Validation {
     this.validations = [
       ...ValidatorBuilder.field('name').maxLength(64).build(),
       ...ValidatorBuilder.field('email').email().required().build(),
-      ...ValidatorBuilder.field('username').required().minLength(3).build(),
+      ...ValidatorBuilder.field('username').required().minLength(3).maxLength(24).build(),
       ...ValidatorBuilder.field('password').required().build(),
       ...ValidatorBuilder.field('confirmPassword').compareAs('password').required().build(),
     ]

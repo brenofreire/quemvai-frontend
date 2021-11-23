@@ -1,9 +1,11 @@
 import { FormEvent } from 'react'
+import { useHistory } from 'react-router'
 import { useRecoilState } from 'recoil'
 import { AddAccount } from '../../../domain/usecases'
 import SignupValidations from '../../../main/builders/singup-validations'
 import signupState from './atom'
 import FormStatus from './components/form-status'
+import GoToLoginButton from './components/go-to-login-button'
 import Input from './components/input'
 import SubmitButton from './components/submit-button'
 
@@ -14,6 +16,7 @@ type SignUpProps = {
 
 const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
   const [state, setState] = useRecoilState(signupState)
+  const history = useHistory()
 
   const validateForm = () => {
     validations.build(state)
@@ -24,7 +27,6 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
     const confirmPasswordError = validations.validate('confirmPassword') && `As senhas não conferem`
 
     return {
-      ...state,
       isLoading: true,
       usernameError,
       emailError,
@@ -39,13 +41,15 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
 
     const validations = validateForm()
 
-    setState(validations)
+    setState({ ...state, ...validations })
 
-    signup.add({} as any)
+    if (!validations.isFormInvalid) {
+      signup.add({} as any)
 
-    setTimeout(() => {
-      setState({ ...validations, isLoading: false })
-    }, 300)
+      setState({ ...state, ...validations, isLoading: false })
+
+      history.replace('/home')
+    }
   }
 
   return (
@@ -61,6 +65,8 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
       </form>
 
       <FormStatus />
+
+      <GoToLoginButton />
     </main>
   )
 }
