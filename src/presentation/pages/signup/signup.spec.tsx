@@ -95,16 +95,6 @@ describe('Test SignUp page', () => {
     expect(comp.signup.callsCount).toBe(1)
   })
 
-  it('Should set form as loading when submit', async () => {
-    makeSut()
-    await submitForm()
-
-    const loadingSpinner = screen.getByTestId('formIsLoading')
-    const submitbutton = screen.getByTestId('submitButton')
-    expect(loadingSpinner).toBeInTheDocument()
-    expect(submitbutton).toBeDisabled()
-  })
-
   it('Should show error when username is not valid', async () => {
     makeSut()
     simulateFormInput({ username: 'sm' })
@@ -175,11 +165,11 @@ describe('Test SignUp page', () => {
     expect(submitbutton).toBeDisabled()
     populateField('usernameInput', 'username')
     expect(submitbutton).toBeDisabled()
-    populateField('emailInput', 'email')
+    populateField('emailInput', faker.internet.email())
     expect(submitbutton).toBeDisabled()
     populateField('passwordInput', 'password')
     expect(submitbutton).toBeDisabled()
-    populateField('confirmPasswordInput', 'confirmPassword')
+    populateField('confirmPasswordInput', 'password')
     expect(submitbutton).not.toBeDisabled()
   })
 

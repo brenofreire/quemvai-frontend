@@ -1,14 +1,12 @@
-import { FormEvent } from 'react'
+import { FormEvent, useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { AddAccount } from '../../../domain/usecases'
 import SignupValidations from '../../../main/builders/singup-validations'
 import { currentAccountState } from '../../components'
-import signupState from './atom'
-import FormStatus from './components/form-status'
-import GoToLoginButton from './components/go-to-login-button'
-import Input from './components/input'
-import SubmitButton from './components/submit-button'
+import { useSkipFirstRender } from '../../hooks'
+import { FormStatus, GoToLoginButton, Input, SubmitButton } from './components'
+import signupState from './components/atom'
 
 type SignUpProps = {
   signup: AddAccount
@@ -16,49 +14,52 @@ type SignUpProps = {
 }
 
 const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
-  const [state, setState] = useRecoilState(signupState)
-  const { setCurrentAccount } = useRecoilValue(currentAccountState)
   const history = useHistory()
 
-  const validateForm = () => {
-    validations.build(state)
+  const { setCurrentAccount } = useRecoilValue(currentAccountState)
+  const [state, setState] = useRecoilState(signupState)
 
-    const usernameError = validations.validate('username') && `Campo usuário inválido`
-    const emailError = validations.validate('email') && `Campo email inválido`
-    const passwordError = validations.validate('email') && `Campo senha inválido`
-    const confirmPasswordError = validations.validate('confirmPassword') && `As senhas não conferem`
-
-    return {
-      isLoading: true,
-      usernameError,
-      emailError,
-      passwordError,
-      confirmPasswordError,
-      isFormInvalid: !!usernameError || !!emailError || !!passwordError || !!confirmPasswordError,
-    }
+  const isFirstRender = useSkipFirstRender()
+  const skipFirstRender = (fn: () => void) => {
+    if (!isFirstRender) fn()
   }
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault()
 
-    const validations = validateForm()
-    const updatedState = { ...state, ...validations }
+    setState((old) => ({ ...old, isLoading: true }))
 
-    setState(updatedState)
-
-    if (!validations.isFormInvalid) {
+    if (!state.isFormInvalid) {
       signup
         .add({} as any)
         .then((account) => {
-          setState({ ...updatedState, isLoading: false })
+          setState((old) => ({ ...old, isLoading: false }))
           setCurrentAccount(account)
           history.replace('/home')
         })
         .catch((error: Error) => {
-          setState({ ...updatedState, isLoading: false, apiError: error.message })
+          setState((old) => ({ ...old, isLoading: false, apiError: error.message }))
         })
     }
   }
+
+  const validateCallback = useCallback(
+    (field: string) => {
+      skipFirstRender(() => {
+        setState((old) => ({ ...old, [`${field}Error`]: validations.validate(field, state) }))
+        setState((old) => ({
+          ...old,
+          isFormInvalid: !!old.usernameError || !!old.emailError || !!old.passwordError || !!old.confirmPasswordError,
+        }))
+      })
+    },
+    [setState, state, validations]
+  )
+
+  useEffect(() => validateCallback('username'), [state.username])
+  useEffect(() => validateCallback('email'), [state.email])
+  useEffect(() => validateCallback('password'), [state.password])
+  useEffect(() => validateCallback('confirmPassword'), [state.confirmPassword])
 
   return (
     <main>

@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil'
-import signupState from '../atom'
+import signupState from './atom'
 
 const FormStatus: React.FC = () => {
   const state = useRecoilValue(signupState)

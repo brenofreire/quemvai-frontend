@@ -16,11 +16,11 @@ export default class SignupValidations implements Validation {
     ]
   }
 
-  validate(fieldName: string) {
+  validate(fieldName: string, input: object) {
     const validating = this.validations.filter((validation) => fieldName === validation.field)
 
     for (const validation of validating) {
-      const error = validation.validate(this.validationObject)
+      const error = validation.validate(input)
 
       if (error) {
         return error.message
@@ -28,9 +28,5 @@ export default class SignupValidations implements Validation {
     }
 
     return null
-  }
-
-  build(validationObject: any) {
-    this.validationObject = validationObject
   }
 }

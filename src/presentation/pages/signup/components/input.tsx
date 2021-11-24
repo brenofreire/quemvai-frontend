@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil'
-import { Input as InputBase } from '../../../components/index'
-import signupState from '../atom'
+import { Input as InputBase } from '../../../components'
+import signupState from './atom'
 
 type SignUpInputProps = {
   placeholder: string

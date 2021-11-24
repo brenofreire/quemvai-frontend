@@ -9,7 +9,7 @@ const signupState = atom({
     username: '',
     email: '',
     password: '',
-    confirmPassword: '' as string | null,
+    confirmPassword: '',
     usernameError: '' as string | null,
     emailError: '' as string | null,
     passwordError: '' as string | null,
