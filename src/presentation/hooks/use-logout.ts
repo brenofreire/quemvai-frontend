@@ -1,10 +1,10 @@
 import { useHistory } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { currentAccountState } from '../components/atoms/atoms'
 
 const useLogout = () => {
   const history = useHistory()
-  const setCurrentAccount = useSetRecoilState(currentAccountState)
+  const { setCurrentAccount } = useRecoilValue(currentAccountState)
 
   return () => {
     setCurrentAccount(undefined)

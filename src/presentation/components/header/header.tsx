@@ -4,7 +4,7 @@ import currentAccountState from '../atoms/atoms'
 
 const Header: React.FC = () => {
   const logout = useLogout()
-  const loggedAccount = useRecoilValue(currentAccountState)
+  const loggedAccount = useRecoilValue(currentAccountState).getCurrentAccount()
 
   return (
     <header>

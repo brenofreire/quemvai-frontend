@@ -2,7 +2,7 @@ import { GetStorage } from './GetStorage'
 import { SetStorage } from './SetStorage'
 
 export class LocalStorageAdapter implements GetStorage, SetStorage {
-  set(key: string, value: object): void {
+  set(key: string, value: any): void {
     if (value) {
       localStorage.setItem(key, JSON.stringify(value))
     } else {

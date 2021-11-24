@@ -1,5 +1,5 @@
 import { FormEvent } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { AccountStatusEnum } from '../../../domain/models/AccountStatusEnum'
 import { LoginAccount } from '../../../domain/usecases'
 import { currentAccountState } from '../../components/atoms/atoms'
@@ -15,7 +15,7 @@ type LoginPresenterProps = {
 const Login: React.FC<LoginPresenterProps> = ({ authentication }) => {
   const getLoginState = useRecoilValue(loginState)
 
-  const [currentAccount, setCurrentAccount] = useRecoilState(currentAccountState)
+  const { setCurrentAccount } = useRecoilValue(currentAccountState)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()

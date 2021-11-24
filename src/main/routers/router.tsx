@@ -7,7 +7,7 @@ import SignUp from '../../presentation/pages/signup/signup'
 import SignupValidations from '../builders/singup-validations'
 
 const AppRouter: React.FC = () => {
-  const currentAccount = useRecoilValue(currentAccountState)
+  const currentAccount = useRecoilValue(currentAccountState).getCurrentAccount()
 
   const makeHome = () => {
     if (currentAccount && currentAccount.id) {

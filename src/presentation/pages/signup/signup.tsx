@@ -1,8 +1,9 @@
 import { FormEvent } from 'react'
 import { useHistory } from 'react-router'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { AddAccount } from '../../../domain/usecases'
 import SignupValidations from '../../../main/builders/singup-validations'
+import { currentAccountState } from '../../components'
 import signupState from './atom'
 import FormStatus from './components/form-status'
 import GoToLoginButton from './components/go-to-login-button'
@@ -16,6 +17,7 @@ type SignUpProps = {
 
 const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
   const [state, setState] = useRecoilState(signupState)
+  const { setCurrentAccount } = useRecoilValue(currentAccountState)
   const history = useHistory()
 
   const validateForm = () => {
@@ -47,8 +49,9 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
     if (!validations.isFormInvalid) {
       signup
         .add({} as any)
-        .then(() => {
+        .then((account) => {
           setState({ ...updatedState, isLoading: false })
+          setCurrentAccount(account)
           history.replace('/home')
         })
         .catch((error: Error) => {

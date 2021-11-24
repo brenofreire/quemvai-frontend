@@ -2,20 +2,28 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import faker from 'faker'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router'
-import { RecoilRoot } from 'recoil'
+import { MutableSnapshot, RecoilRoot } from 'recoil'
 import EmailInUseError from '../../../domain/erros/EmailInUseError'
+import { Account } from '../../../domain/models/Account'
 import SignupValidations from '../../../main/builders/singup-validations'
+import { currentAccountState } from '../../components'
 import { MakeSignupMock } from './mocks'
 import SignUp from './signup'
 
 const history = createMemoryHistory({ initialEntries: ['/signup'] })
 
 const makeSut = () => {
-  const handleSubmit = jest.fn()
   const signup = new MakeSignupMock()
 
+  const setCurrentAccount = jest.fn()
+  const getCurrentAccount = jest.fn()
+
+  const initializeState = ({ set }: MutableSnapshot) => {
+    set(currentAccountState, { setCurrentAccount, getCurrentAccount })
+  }
+
   render(
-    <RecoilRoot initializeState={() => {}}>
+    <RecoilRoot initializeState={initializeState}>
       <Router history={history}>
         <SignUp signup={signup} validations={new SignupValidations()}></SignUp>
       </Router>
@@ -23,8 +31,8 @@ const makeSut = () => {
   )
 
   return {
-    handleSubmit,
     signup,
+    setCurrentAccount,
   }
 }
 
@@ -109,6 +117,8 @@ describe('Test SignUp page', () => {
   it('Should show error when email is not valid', async () => {
     makeSut()
     simulateFormInput({ email: 'wrong email' })
+    simulateFormInput({ email: 'email@asd' })
+    simulateFormInput({ email: 'emaail @ teste .com' })
     await submitForm()
 
     const emailError = screen.getByTestId('emailError')
@@ -171,5 +181,15 @@ describe('Test SignUp page', () => {
     expect(submitbutton).toBeDisabled()
     populateField('confirmPasswordInput', 'confirmPassword')
     expect(submitbutton).not.toBeDisabled()
+  })
+
+  it('Should save account in storage when signup succed', async () => {
+    const { setCurrentAccount, signup } = makeSut()
+    jest.spyOn(signup, 'add').mockResolvedValue({ id: 1 } as Account)
+
+    simulateValidFormInput()
+    await submitForm()
+
+    expect(setCurrentAccount).toHaveBeenCalledWith({ id: 1 })
   })
 })
