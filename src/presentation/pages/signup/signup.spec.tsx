@@ -104,6 +104,23 @@ describe('Test SignUp page', () => {
     expect(usernameError).toBeInTheDocument()
   })
 
+  it('Should not show any other error if input value is not filled', async () => {
+    makeSut()
+    simulateFormInput({
+      name: '',
+      username: 'sm',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    })
+
+    const usernameError = screen.getByTestId('usernameError')
+    const formStatus = screen.getByTestId('formStatus')
+    expect(usernameError).toBeInTheDocument()
+    expect(formStatus).toBeInTheDocument()
+    expect(formStatus.children).toHaveLength(1)
+  })
+
   it('Should show error when email is not valid', async () => {
     makeSut()
     simulateFormInput({ email: 'wrong email' })

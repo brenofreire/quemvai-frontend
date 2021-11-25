@@ -48,22 +48,24 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
   }
 
   const validate = useCallback(
-    (field: string) => {
-      skipFirstRender(() => {
-        setState((old) => ({ ...old, [`${field}Error`]: validations.validate(field, old) }))
-        setState((old) => ({
-          ...old,
-          isFormInvalid: !!old.usernameError || !!old.emailError || !!old.passwordError || !!old.confirmPasswordError,
-        }))
-      })
+    (field: any, hasContent) => {
+      if (hasContent) {
+        skipFirstRender(() => {
+          setState((old) => ({ ...old, [`${field}Error`]: validations.validate(field, old) }))
+          setState((old) => ({
+            ...old,
+            isFormInvalid: !!old.usernameError || !!old.emailError || !!old.passwordError || !!old.confirmPasswordError,
+          }))
+        })
+      }
     },
     [setState, validations, skipFirstRender]
   )
 
-  useEffect(() => validate('username'), [state.username, validate])
-  useEffect(() => validate('email'), [state.email, validate])
-  useEffect(() => validate('password'), [state.password, validate])
-  useEffect(() => validate('confirmPassword'), [state.confirmPassword, validate])
+  useEffect(() => validate('username', state.username.length), [state.username, validate])
+  useEffect(() => validate('email', state.email.length), [state.email, validate])
+  useEffect(() => validate('password', state.password.length), [state.password, validate])
+  useEffect(() => validate('confirmPassword', state.confirmPassword.length), [state.confirmPassword, validate])
 
   return (
     <main>
@@ -77,7 +79,7 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
         <SubmitButton text="Criar Conta"></SubmitButton>
       </form>
 
-      <FormStatus />
+      <FormStatus data-testid="formStatus" />
 
       <GoToLoginButton />
     </main>

@@ -7,6 +7,6 @@ export class EmailValidation implements FieldValidation {
   validate(input: any): Error | null {
     const emailRegex =
       /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-    return !input[this.field] || emailRegex.test(input[this.field]) ? null : new InvalidFieldError()
+    return !input[this.field] || emailRegex.test(input[this.field]) ? null : new InvalidFieldError('deve ser válido')
   }
 }
