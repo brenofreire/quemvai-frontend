@@ -1,10 +1,10 @@
-import { Account } from '../../domain/models/Account'
+import { UserLogged } from '../../domain/models'
 import { LocalStorageAdapter } from '../../infra/cache'
 
-export const setCurrentAccountAdapter = (account: Account | undefined) => {
+export const setCurrentAccountAdapter = (account: UserLogged | undefined) => {
   return new LocalStorageAdapter().set('account', account)
 }
 
-export const getCurrentAccountAdapter = () => {
+export const getCurrentAccountAdapter = (): UserLogged => {
   return new LocalStorageAdapter().get('account')
 }

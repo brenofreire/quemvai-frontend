@@ -1,11 +1,11 @@
 import { atom } from 'recoil'
-import { Account } from '../../../domain/models/Account'
+import { UserLogged } from '../../../domain/models'
 
 export const currentAccountState = atom({
   key: 'currentAccountState',
   default: {
-    getCurrentAccount: null as unknown as () => Account,
-    setCurrentAccount: null as unknown as (params: Account | undefined) => void,
+    getCurrentAccount: null as unknown as () => UserLogged,
+    setCurrentAccount: null as unknown as (params: UserLogged | undefined) => void,
   },
 })
 

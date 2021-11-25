@@ -4,7 +4,7 @@ import { createMemoryHistory } from 'history'
 import { Router } from 'react-router'
 import { MutableSnapshot, RecoilRoot } from 'recoil'
 import EmailInUseError from '../../../domain/erros/EmailInUseError'
-import { Account } from '../../../domain/models/Account'
+import { UserLogged } from '../../../domain/models'
 import SignupValidations from '../../../main/builders/singup-validations'
 import { currentAccountState } from '../../components'
 import { MakeSignupMock } from './mocks'
@@ -175,7 +175,7 @@ describe('Test SignUp page', () => {
 
   it('Should save account in storage when signup succed', async () => {
     const { setCurrentAccount, signup } = makeSut()
-    jest.spyOn(signup, 'add').mockResolvedValue({ id: 1 } as Account)
+    jest.spyOn(signup, 'add').mockResolvedValue({ id: 1 } as UserLogged)
 
     simulateValidFormInput()
     await submitForm()

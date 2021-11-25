@@ -20,9 +20,13 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
   const [state, setState] = useRecoilState(signupState)
 
   const isFirstRender = useSkipFirstRender()
-  const skipFirstRender = (fn: () => void) => {
-    if (!isFirstRender) fn()
-  }
+
+  const skipFirstRender = useCallback(
+    (fn: () => void) => {
+      if (!isFirstRender) fn()
+    },
+    [isFirstRender]
+  )
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault()
@@ -43,23 +47,23 @@ const SignUp: React.FC<SignUpProps> = ({ signup, validations }) => {
     }
   }
 
-  const validateCallback = useCallback(
+  const validate = useCallback(
     (field: string) => {
       skipFirstRender(() => {
-        setState((old) => ({ ...old, [`${field}Error`]: validations.validate(field, state) }))
+        setState((old) => ({ ...old, [`${field}Error`]: validations.validate(field, old) }))
         setState((old) => ({
           ...old,
           isFormInvalid: !!old.usernameError || !!old.emailError || !!old.passwordError || !!old.confirmPasswordError,
         }))
       })
     },
-    [setState, state, validations]
+    [setState, validations, skipFirstRender]
   )
 
-  useEffect(() => validateCallback('username'), [state.username])
-  useEffect(() => validateCallback('email'), [state.email])
-  useEffect(() => validateCallback('password'), [state.password])
-  useEffect(() => validateCallback('confirmPassword'), [state.confirmPassword])
+  useEffect(() => validate('username'), [state.username, validate])
+  useEffect(() => validate('email'), [state.email, validate])
+  useEffect(() => validate('password'), [state.password, validate])
+  useEffect(() => validate('confirmPassword'), [state.confirmPassword, validate])
 
   return (
     <main>

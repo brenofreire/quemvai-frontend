@@ -1,9 +1,9 @@
 import { FormEvent } from 'react'
 import { useRecoilValue } from 'recoil'
-import { AccountStatusEnum } from '../../../domain/models/AccountStatusEnum'
 import { LoginAccount } from '../../../domain/usecases'
 import { currentAccountState } from '../../components/atoms/atoms'
 import Header from '../../components/header/header'
+import { mockLoggedAccount } from '../signup/mocks'
 import { loginState } from './atom'
 import Input from './components/input'
 import SubmitButton from './components/submit-button'
@@ -20,15 +20,7 @@ const Login: React.FC<LoginPresenterProps> = ({ authentication }) => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
-    setCurrentAccount({
-      id: 1,
-      createdAt: new Date().toISOString(),
-      email: 'fake@example.com',
-      username: 'Fake Name',
-      password: 'fake!password',
-      status: AccountStatusEnum.ACTIVE,
-      updatedAt: new Date().toISOString(),
-    })
+    setCurrentAccount(mockLoggedAccount)
 
     authentication.login({
       username: getLoginState.username,

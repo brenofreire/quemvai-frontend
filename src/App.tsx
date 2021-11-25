@@ -1,13 +1,13 @@
 import React from 'react'
 import { RecoilRoot } from 'recoil'
-import { Account } from './domain/models/Account'
+import { UserLogged } from './domain/models'
 import { getCurrentAccountAdapter, setCurrentAccountAdapter } from './main/adapters'
 import AppRouter from './main/routers/router'
 import { currentAccountState } from './presentation/components'
 
 function App() {
   const state = {
-    setCurrentAccount: (account: Account | undefined) => setCurrentAccountAdapter(account),
+    setCurrentAccount: (account: UserLogged | undefined) => setCurrentAccountAdapter(account),
     getCurrentAccount: () => getCurrentAccountAdapter(),
   }
 

@@ -1,3 +1,4 @@
+import { UserLogged } from '../models'
 import { Account } from '../models/Account'
 import { UnusedKeysModelWithStatus } from '../models/UnusedKeysModel'
 
@@ -10,5 +11,5 @@ export namespace AddAccount {
     passwordConfirmation: string
   }
 
-  export type Model = Account
+  export type Model = UserLogged
 }
