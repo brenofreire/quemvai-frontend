@@ -1,6 +1,6 @@
 import { LoginAccount } from '../../../domain/usecases'
 import { AxiosHttpClient } from '../../../infra/http/AxiosHttpRequester'
-import { LoginAccountService } from '../../../infra/services/login-account-service'
+import { LoginAccountService } from '../../../infra/services'
 
 const makeLoginAccountAuthenticator = (): LoginAccount => new LoginAccountService(new AxiosHttpClient(), 'login')
 

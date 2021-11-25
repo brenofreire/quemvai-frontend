@@ -2,9 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { currentAccountState } from '../../presentation/components'
-import { MakeSignupMock } from '../../presentation/pages/signup/mocks'
-import SignUp from '../../presentation/pages/signup/signup'
-import SignupValidations from '../builders/singup-validations'
+import { makeSignUpPage } from '../factories/pages'
 
 const AppRouter: React.FC = () => {
   const currentAccount = useRecoilValue(currentAccountState).getCurrentAccount()
@@ -18,11 +16,7 @@ const AppRouter: React.FC = () => {
       )
     }
 
-    return (
-      <Route path="/">
-        <SignUp signup={new MakeSignupMock()} validations={new SignupValidations()}></SignUp>
-      </Route>
-    )
+    return <Route path="/signup" component={makeSignUpPage}></Route>
   }
 
   return (

@@ -1,7 +1,7 @@
 import { LoginAccount } from '../../domain/usecases'
 import { HttpClient } from '../http/HttpClient'
 
-export class LoginAccountService implements LoginAccount {
+export default class LoginAccountService implements LoginAccount {
   constructor(private readonly httpClient: HttpClient, private readonly url: string) {}
 
   login(params: LoginAccount.Paranms): Promise<LoginAccount.Model> {
