@@ -4,7 +4,7 @@ import { UserLogged } from '../../../domain/models'
 export const currentAccountState = atom({
   key: 'currentAccountState',
   default: {
-    getCurrentAccount: null as unknown as () => UserLogged,
+    getCurrentAccount: null as unknown as () => UserLogged | undefined,
     setCurrentAccount: null as unknown as (params: UserLogged | undefined) => void,
   },
 })

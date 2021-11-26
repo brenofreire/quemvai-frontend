@@ -7,21 +7,11 @@ import { makeSignUpPage } from '../factories/pages'
 const AppRouter: React.FC = () => {
   const currentAccount = useRecoilValue(currentAccountState).getCurrentAccount()
 
-  const makeHome = () => {
-    if (currentAccount && currentAccount.id) {
-      return (
-        <Route path="">
-          <div>Usuario Logado</div>
-        </Route>
-      )
-    }
-
-    return <Route path="/signup" component={makeSignUpPage}></Route>
-  }
-
   return (
     <Router>
-      <Switch>{makeHome()}</Switch>
+      <Switch>
+        <Route path="/signup" component={makeSignUpPage}></Route>
+      </Switch>
     </Router>
   )
 }
