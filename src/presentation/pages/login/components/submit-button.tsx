@@ -8,9 +8,10 @@ type SubmitButtonProps = {
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = (props) => {
+  const getLoginState = useRecoilValue(loginState)
   const state = useRecoilValue(loginState)
 
-  return <Button state={state} {...props} />
+  return <Button disabled={getLoginState.isLoginValid} state={state} {...props} />
 }
 
 export default SubmitButton

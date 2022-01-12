@@ -1,5 +1,5 @@
-import { Pool } from '../../models/pool/Pool'
-import { UnusedKeysModelWithStatus } from '../../models/UnusedKeysModel'
+import { Pool } from '../../models/pool/pool-model'
+import { UnusedKeysModelWithStatus } from '../../models/unused-keys-model'
 
 export interface CreatePool {
   create(param: CreatePool.Params): Promise<CreatePool.Model>

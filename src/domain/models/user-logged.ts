@@ -1,4 +1,4 @@
-import { Account } from './'
+import { Account } from '.'
 
 export type UserLogged = Account & {
   accessToken: string

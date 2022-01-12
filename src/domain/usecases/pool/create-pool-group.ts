@@ -1,5 +1,5 @@
-import { PoolGroup } from '../../models/pool/PoolGroup'
-import { UnusedKeysModelWithStatus } from '../../models/UnusedKeysModel'
+import { PoolGroup } from '../../models/pool/pool-group'
+import { UnusedKeysModelWithStatus } from '../../models/unused-keys-model'
 
 export interface CreatePoolGroup {
   create(params: CreatePoolGroup.Params): Promise<CreatePoolGroup.Model>

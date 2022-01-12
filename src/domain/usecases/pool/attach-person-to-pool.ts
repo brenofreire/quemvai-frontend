@@ -1,5 +1,5 @@
-import { PoolPerson } from '../../models/pool/PoolPerson'
-import { UnusedKeysModel } from '../../models/UnusedKeysModel'
+import { PoolPerson } from '../../models/pool/pool-person'
+import { UnusedKeysModel } from '../../models/unused-keys-model'
 
 export interface AttachPersonToPool {
   attach(params: AttachPersonToPool.Params): Promise<AttachPersonToPool.Model>

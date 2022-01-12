@@ -1,5 +1,5 @@
 import { LoginAccount } from '../../domain/usecases'
-import { HttpClient } from '../http/HttpClient'
+import { HttpClient } from '../http/http-client'
 
 export default class LoginAccountService implements LoginAccount {
   constructor(private readonly httpClient: HttpClient, private readonly url: string) {}

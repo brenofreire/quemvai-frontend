@@ -3,10 +3,11 @@ import faker from 'faker'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router'
 import { MutableSnapshot, RecoilRoot } from 'recoil'
-import EmailInUseError from '../../../domain/erros/EmailInUseError'
+import EmailInUseError from '../../../domain/erros/email-in-use-error'
 import { UserLogged } from '../../../domain/models'
 import SignupValidations from '../../../main/builders/singup-validations'
 import { currentAccountState } from '../../components'
+import { populateField } from '../../test/helpers'
 import { MakeSignupMock } from './mocks'
 import SignUp from './signup'
 
@@ -41,11 +42,6 @@ const simulateValidFormInput = (password = faker.internet.password()) =>
     password: password,
     confirmPassword: password,
   })
-
-const populateField = (testId: string, value = faker.random.word()) => {
-  const el = screen.getByTestId(testId)
-  fireEvent.input(el, { target: { value } })
-}
 
 const simulateFormInput = ({
   name = faker.name.firstName(),

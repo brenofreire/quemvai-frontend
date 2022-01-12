@@ -1,5 +1,4 @@
-import { Pool } from '../../models/pool/Pool'
-import { PoolInterest } from '../../models/pool/PoolInterest'
+import { Pool, PoolInterest } from '../../models/pool'
 
 export interface ListPools {
   listAll(params: ListPools.Params): Promise<ListPools.Model>

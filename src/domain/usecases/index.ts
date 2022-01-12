@@ -1,3 +1,3 @@
-export * from './CreateAccount'
-export * from './LoginAccount'
+export * from './create-account'
+export * from './login-account'
 export * from './pool/index'

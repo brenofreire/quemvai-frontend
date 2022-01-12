@@ -1,4 +1,4 @@
-import { PoolInteractionTypeEnum } from './enums/PoolInteractionTypeEnum'
+import { PoolInteractionTypeEnum } from './enums/pool-interaction-type-enum'
 
 export interface PoolInteraction {
   id: number

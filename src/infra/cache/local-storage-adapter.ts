@@ -1,5 +1,5 @@
-import { GetStorage } from './GetStorage'
-import { SetStorage } from './SetStorage'
+import { GetStorage } from './get-storage'
+import { SetStorage } from './set-storage'
 
 export class LocalStorageAdapter implements GetStorage, SetStorage {
   set(key: string, value: any): void {

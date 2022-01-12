@@ -1,4 +1,4 @@
-import { HttpAccessDenied } from '../../infra/http/HttpAccessDenied'
+import { HttpAccessDenied } from '../../infra/http/http-access-denied'
 import useLogout from './use-logout'
 
 type ResultType = () => void

@@ -1,26 +1,57 @@
 import { render, screen } from '@testing-library/react'
 import { MutableSnapshot, RecoilRoot } from 'recoil'
-import makeLoginAccountAuthenticator from '../../../main/factories/usecases/login-account-maker'
 import { currentAccountState } from '../../components'
+import { populateField } from '../../test/helpers'
 import Login from './login'
+
+const makeSut = () => {
+  const setCurrentAccount = jest.fn()
+  const getCurrentAccount = jest.fn()
+  const login = jest.fn()
+
+  const initializeState = ({ set }: MutableSnapshot) => {
+    set(currentAccountState, { setCurrentAccount, getCurrentAccount })
+  }
+
+  const mockAuthenticationLogin = () => {
+    return { login }
+  }
+
+  render(
+    <RecoilRoot initializeState={initializeState}>
+      <Login authentication={mockAuthenticationLogin()} />
+    </RecoilRoot>
+  )
+
+  return {
+    mockAuthenticationLogin,
+  }
+}
 
 describe('Login presenter test', () => {
   it('Should have username field', () => {
-    const setCurrentAccount = jest.fn()
-    const getCurrentAccount = jest.fn()
+    makeSut()
+    const usernameInput = ['username', 'Usuário', 'text']
+    const passowordInput = ['password', 'Senha', 'password']
 
-    const initializeState = ({ set }: MutableSnapshot) => {
-      set(currentAccountState, { setCurrentAccount, getCurrentAccount })
-    }
+    const inputs = [usernameInput, passowordInput]
 
-    render(
-      <RecoilRoot initializeState={initializeState}>
-        <Login authentication={makeLoginAccountAuthenticator()} />
-      </RecoilRoot>
-    )
+    inputs.forEach(([itemName, itemText, itemType]) => {
+      const el = screen.getByTestId(`${itemName}Input`) as HTMLInputElement
 
-    const usernameField = screen.getByTestId('username-input')
+      expect(el.getAttribute('name')).toEqual(itemName)
+      expect(el.getAttribute('placeholder')).toEqual(itemText)
+      expect(el.type).toEqual(itemType)
+    })
+  })
 
-    expect(usernameField).toBeInTheDocument()
+  it('Submit Button should be disabled if there is no values in the form', () => {
+    makeSut()
+    const submitButton = screen.getByTestId('submitButton')
+
+    populateField('usernameInput', 'any')
+    expect(submitButton).toBeDisabled()
+    populateField('passwordInput', 'any')
+    expect(submitButton).not.toBeDisabled()
   })
 })

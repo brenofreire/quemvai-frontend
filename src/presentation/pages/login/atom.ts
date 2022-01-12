@@ -11,6 +11,6 @@ export const loginState = atom<LoginState>({
   default: {
     username: '',
     password: '',
-    isLoginValid: false,
+    isLoginValid: true,
   },
 })

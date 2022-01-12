@@ -1,4 +1,4 @@
-import { PoolPersonStatusEnum } from './enums/PoolPersonStatusEnum'
+import { PoolPersonStatusEnum } from './enums/pool-person-status-enum'
 
 export interface PoolPerson {
   id: number

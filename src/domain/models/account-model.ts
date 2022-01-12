@@ -1,4 +1,4 @@
-import { AccountStatusEnum } from './AccountStatusEnum'
+import { AccountStatusEnum } from './account-status-enum'
 
 export interface Account {
   id: number

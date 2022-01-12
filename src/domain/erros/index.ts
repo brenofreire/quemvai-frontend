@@ -1,1 +1,1 @@
-export * from './EmailInUseError'
+export * from './email-in-use-error'
