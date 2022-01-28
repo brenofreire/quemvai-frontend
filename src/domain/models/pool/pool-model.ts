@@ -1,4 +1,4 @@
-import { PoolErcurrenceEnum, PoolStatusEnum } from './enums'
+import { PoolRecurrenceEnum, PoolStatusEnum } from './enums'
 import { PoolInterest } from './pool-interest'
 
 export interface Pool {
