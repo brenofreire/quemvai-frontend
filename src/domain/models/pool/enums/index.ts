@@ -1,5 +1,5 @@
 export * from './person-status-in-pool-group'
-export * from './pool-ercurrence-enum'
+export * from './pool-recurrence-enum'
 export * from './pool-interaction-type-enum'
 export * from './pool-person-status-enum'
 export * from './pool-status-enum'
