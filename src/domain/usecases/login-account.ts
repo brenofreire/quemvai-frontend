@@ -1,4 +1,4 @@
-import { Account } from '../models/account-model'
+import { Account } from './models/account-model'
 
 export interface LoginAccount {
   login(params: LoginAccount.Paranms): Promise<LoginAccount.Model>
