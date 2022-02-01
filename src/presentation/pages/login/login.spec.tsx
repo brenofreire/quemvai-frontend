@@ -29,7 +29,7 @@ const makeSut = () => {
 }
 
 describe('Login presenter test', () => {
-  it('Should have username field', () => {
+  it('Should have username & password field', () => {
     makeSut()
     const usernameInput = ['username', 'Usuário', 'text']
     const passowordInput = ['password', 'Senha', 'password']
@@ -53,5 +53,19 @@ describe('Login presenter test', () => {
     expect(submitButton).toBeDisabled()
     populateField('passwordInput', 'any')
     expect(submitButton).not.toBeDisabled()
+  })
+
+  it('Should have link to signup page', () => {
+    makeSut()
+    const signupLink = screen.getByTestId('signupLink')
+
+    expect(signupLink.getAttribute('href')).toEqual('/signup')
+  })
+
+  it('Should have proper text on signup link', () => {
+    makeSut()
+    const signupLink = screen.getByTestId('signupLink')
+
+    expect(signupLink.innerHTML).toEqual('Cadastra-se')
   })
 })
