@@ -4,6 +4,7 @@ import {
   EmailValidation,
   MaxLengthValidation,
   MinLengthValidation,
+  PasswordValidation,
   RequiredFieldValidation,
   UsernameValidation,
 } from './validators'
@@ -47,6 +48,12 @@ export class ValidatorBuilder {
 
   username(): ValidatorBuilder {
     this.validations.push(new UsernameValidation(this.fieldName))
+
+    return this
+  }
+
+  password(): ValidatorBuilder {
+    this.validations.push(new PasswordValidation(this.fieldName))
 
     return this
   }

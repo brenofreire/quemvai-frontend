@@ -86,6 +86,7 @@ describe('Test SignUp page', () => {
   it('Should make API Signup request when Submit form', async () => {
     const comp = makeSut()
     simulateValidFormInput()
+
     await submitForm()
 
     expect(comp.signup.callsCount).toBe(1)
@@ -181,15 +182,16 @@ describe('Test SignUp page', () => {
   it('Should disable submit button if some input is not filled', () => {
     makeSut()
     const submitbutton = screen.getByTestId('submitButton')
+    const password = faker.internet.password()
     populateField('nameInput', 'name')
     expect(submitbutton).toBeDisabled()
     populateField('usernameInput', 'username')
     expect(submitbutton).toBeDisabled()
     populateField('emailInput', faker.internet.email())
     expect(submitbutton).toBeDisabled()
-    populateField('passwordInput', 'password')
+    populateField('passwordInput', password)
     expect(submitbutton).toBeDisabled()
-    populateField('confirmPasswordInput', 'password')
+    populateField('confirmPasswordInput', password)
     expect(submitbutton).not.toBeDisabled()
   })
 
