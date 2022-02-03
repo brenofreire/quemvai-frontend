@@ -37,7 +37,7 @@ const makeSut = () => {
   }
 }
 
-const simulateValidFormInput = (password = faker.internet.password()) =>
+const simulateValidFormInput = (password = 'P@ssw0rd?') =>
   simulateFormInput({
     password: password,
     confirmPassword: password,
@@ -130,6 +130,7 @@ describe('Test SignUp page', () => {
     simulateFormInput({ email: 'wrong email' })
     simulateFormInput({ email: 'email@asd' })
     simulateFormInput({ email: 'emaail @ teste .com' })
+    simulateFormInput({ email: 'emaail@teste.co m' })
     await submitForm()
 
     const emailError = screen.getByTestId('emailError')
