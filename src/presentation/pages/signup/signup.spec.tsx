@@ -93,7 +93,14 @@ describe('Test SignUp page', () => {
 
   it('Should show error when username is not valid', async () => {
     makeSut()
-    simulateFormInput({ username: 'sm' })
+    simulateFormInput({ username: 'wrong usernanae' })
+    const emailError = screen.getByTestId('usernameError')
+    expect(emailError).toBeInTheDocument()
+    simulateFormInput({ username: 'askldçlkllççç' })
+    expect(emailError).toBeInTheDocument()
+    simulateFormInput({ username: 'username????' })
+    expect(emailError).toBeInTheDocument()
+
     await submitForm()
 
     const usernameError = screen.getByTestId('usernameError')
@@ -125,14 +132,6 @@ describe('Test SignUp page', () => {
     await submitForm()
 
     const emailError = screen.getByTestId('emailError')
-    expect(emailError).toBeInTheDocument()
-  })
-
-  it('Should show error when username is not valid', async () => {
-    makeSut()
-    simulateFormInput({ username: 'wrong email' })
-
-    const emailError = screen.getByTestId('usernameError')
     expect(emailError).toBeInTheDocument()
   })
 

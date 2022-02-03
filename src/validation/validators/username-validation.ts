@@ -5,9 +5,9 @@ export class UsernameValidation implements FieldValidation {
   constructor(readonly field: string) {}
 
   validate(input: any): Error | null {
-    const usernameRegex = /^[a-zA-Z0-9]+$/
+    const usernameRegex = /^[a-zA-Z0-9_.]+$/
 
-    if (usernameRegex.test(input)) {
+    if (usernameRegex.test(input[this.field])) {
       return null
     } else {
       const errorMessage = 'deve ter apenas letras e números'
