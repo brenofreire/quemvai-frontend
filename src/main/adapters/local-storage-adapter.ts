@@ -1,4 +1,4 @@
-import { GetStorage, SetStorage } from './cache'
+import { GetStorage, SetStorage } from '../../infra/cache'
 
 export class LocalStorageAdapter implements GetStorage, SetStorage {
   set(key: string, value: any): void {

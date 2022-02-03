@@ -1,9 +1,7 @@
-import { Account } from './models/account-model'
-
+import { Account } from '../models'
 export interface LoginAccount {
   login(params: LoginAccount.Paranms): Promise<LoginAccount.Model>
 }
-
 export namespace LoginAccount {
   export type Paranms = {
     username: string

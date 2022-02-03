@@ -54,18 +54,4 @@ describe('Login presenter test', () => {
     populateField('passwordInput', 'any')
     expect(submitButton).not.toBeDisabled()
   })
-
-  it('Should have link to signup page', () => {
-    makeSut()
-    const signupLink = screen.getByTestId('signupLink')
-
-    expect(signupLink.getAttribute('href')).toEqual('/signup')
-  })
-
-  it('Should have proper text on signup link', () => {
-    makeSut()
-    const signupLink = screen.getByTestId('signupLink')
-
-    expect(signupLink.innerHTML).toEqual('Cadastra-se')
-  })
 })

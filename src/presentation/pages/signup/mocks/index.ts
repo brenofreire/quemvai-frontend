@@ -1,5 +1,5 @@
 import faker from 'faker'
-import { AccountStatusEnum } from '../../../../domain/models'
+import { AccountStatusEnum } from '../../../../domain/models/pool/enums'
 import { AddAccount } from '../../../../domain/usecases'
 
 export const mockLoggedAccount = {

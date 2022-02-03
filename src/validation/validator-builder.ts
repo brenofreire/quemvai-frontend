@@ -1,6 +1,12 @@
 import { FieldValidation } from './protocols'
-import { CompareFieldsValidation, EmailValidation, MinLengthValidation, RequiredFieldValidation } from './validators'
-import { MaxLengthValidation } from './validators/max-length-validation'
+import {
+  CompareFieldsValidation,
+  EmailValidation,
+  MaxLengthValidation,
+  MinLengthValidation,
+  RequiredFieldValidation,
+  UsernameValidation,
+} from './validators'
 
 export class ValidatorBuilder {
   private constructor(private readonly fieldName: string, private readonly validations: FieldValidation[]) {}
@@ -35,6 +41,12 @@ export class ValidatorBuilder {
 
   maxLength(length: number): ValidatorBuilder {
     this.validations.push(new MaxLengthValidation(this.fieldName, length))
+
+    return this
+  }
+
+  username(): ValidatorBuilder {
+    this.validations.push(new UsernameValidation(this.fieldName))
 
     return this
   }

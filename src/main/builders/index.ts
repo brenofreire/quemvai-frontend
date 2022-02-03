@@ -1,1 +1,1 @@
-export * from './singup-validations'
+export { default as SignupValidations } from './singup-validations'

@@ -128,6 +128,14 @@ describe('Test SignUp page', () => {
     expect(emailError).toBeInTheDocument()
   })
 
+  it('Should show error when username is not valid', async () => {
+    makeSut()
+    simulateFormInput({ username: 'wrong email' })
+
+    const emailError = screen.getByTestId('usernameError')
+    expect(emailError).toBeInTheDocument()
+  })
+
   it('Should show error when password do not match', async () => {
     makeSut()
     simulateFormInput({ confirmPassword: '123123123' })
